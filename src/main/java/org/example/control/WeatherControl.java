@@ -39,7 +39,7 @@ public class WeatherControl {
         WeatherStore weatherStore = new WeatherStoreSqlite();
         for (Location iteredLocation : canary_islands) {
             for (Instant iteredInstant : instants) {
-                weatherStore.load(iteredLocation, iteredInstant);
+                weatherStore.save(iteredLocation, iteredInstant);
             }
         }
     }

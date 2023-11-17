@@ -15,18 +15,13 @@ import java.util.concurrent.TimeUnit;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-
-        // Crea un ScheduledExecutorService con un hilo para ejecutar tareas programadas
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        // Programa la tarea para ejecutarse cada seis horas
         scheduler.scheduleAtFixedRate(() -> {
             execute();
         }, 0, 6, TimeUnit.HOURS);
     }
     private static void execute() {
-        // Aquí colocas la lógica que deseas ejecutar cada seis horas
-        System.out.println("+++");
+        System.out.println("Nueva Actualización");
 
     }
 }
