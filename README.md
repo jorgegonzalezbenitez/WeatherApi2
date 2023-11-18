@@ -39,4 +39,8 @@ The design architecture is structured into two extensive sets of packages:
 
 
 #### Project Diagram in StarUml
+<<<<<<< HEAD
 <img width="605" alt="image" src="https://github.com/jorgegonzalezbenitez/WeatherApi/assets/145259600/4a305b3c-dbfd-4521-8819-5ddce64ea942">
+=======
+<img width="605" alt="image" src="https://github.com/jorgegonzalezbenitez/WeatherApi/assets/145259600/4a305b3c-dbfd-4521-8819-5ddce64ea942">
+>>>>>>> origin/master
