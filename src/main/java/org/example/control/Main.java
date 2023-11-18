@@ -7,6 +7,8 @@ import org.example.model.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -15,13 +17,17 @@ import java.util.concurrent.TimeUnit;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(() -> {
-            execute();
-        }, 0, 6, TimeUnit.HOURS);
-    }
-    private static void execute() {
-        System.out.println("Nueva Actualización");
+        Timer timer = new Timer();
 
+        TimerTask TimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                WeatherControl weatherController = new WeatherControl(new WeatherMapProvider(args[0]));
+                weatherController.execute();
+            }
+        };
+
+        long execution_time = 6 * 60 * 60 * 1000;
+        timer.schedule(TimerTask, 0, execution_time);
     }
 }

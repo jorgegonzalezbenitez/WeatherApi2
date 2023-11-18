@@ -3,15 +3,15 @@ import java.time.Instant;
 public class Weather {
     private final double temp;
     private final int humidity;
-    private final int clouds;
+    private final int all;
     private final double speed;
     private final Double pop;
     private final Instant instant;
 
-    public Weather(double temp, int humidity, int clouds, double speed, Double pop, Instant instant) {
+    public Weather(double temp, int humidity, int all, double speed, Double pop, Instant instant) {
         this.temp = temp;
         this.humidity = humidity;
-        this.clouds = clouds;
+        this.all = all;
         this.speed = speed;
         this.pop = pop;
         this.instant = instant;
@@ -25,8 +25,8 @@ public class Weather {
         return humidity;
     }
 
-    public int getClouds() {
-        return clouds;
+    public int getCloud() {
+        return all;
     }
 
     public double getSpeed() {
