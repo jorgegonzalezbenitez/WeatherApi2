@@ -25,7 +25,7 @@ public class Weather {
         return humidity;
     }
 
-    public int getCloud() {
+    public int getClouds() {
         return all;
     }
 

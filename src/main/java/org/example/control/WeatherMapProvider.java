@@ -22,7 +22,7 @@ public class WeatherMapProvider implements WeatherProvider{
     @Override
     public  Weather getWeather(Location location, Instant instant) {
 
-        Weather weatherObject = null;
+        Weather obj_weather = null;
         try {
 
             String url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + location.getLat() + "&lon=" + location.getLon() + "&appid=" + API_KEY;
@@ -49,7 +49,7 @@ public class WeatherMapProvider implements WeatherProvider{
 
 
                 if (weatherInstant.equals(instant)) {
-                    weatherObject = new Weather(temp, humidity, all, speed, pop, weatherInstant);
+                    obj_weather = new Weather(temp, humidity, all, speed, pop, weatherInstant);
                     break;
 
                 }
@@ -59,6 +59,6 @@ public class WeatherMapProvider implements WeatherProvider{
             throw new RuntimeException();
 
         }
-        return weatherObject;
+        return obj_weather;
     }
 }

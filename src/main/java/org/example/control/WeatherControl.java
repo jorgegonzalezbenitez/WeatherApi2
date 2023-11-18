@@ -1,7 +1,5 @@
 package org.example.control;
-
 import org.example.model.*;
-
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -27,49 +25,40 @@ public class WeatherControl {
         List<Location> canary_islands = List.of(gran_canaria, tenerife,lanzarote,gomera,fuerteventura,palma,hierro,graciosa);
 
         
-        ArrayList<Weather> weathers =new ArrayList<>();
-        ArrayList<Instant> instants =new ArrayList<>();
+        ArrayList<Weather> climates =new ArrayList<>();
+        ArrayList<Instant> times =new ArrayList<>();
 
-        InstantCreated(instants);
-        WeatherCall(instants,canary_islands,weathers);
-        SaveCall(instants,canary_islands);
+        InstantCreated(times);
+        WeatherCall(times,canary_islands,climates);
+        SaveCall(times,canary_islands);
 
     }
-    public static ArrayList<Instant> InstantCreated(ArrayList<Instant> instants) {
+    public static ArrayList<Instant> InstantCreated(ArrayList<Instant> times) {
         for (int i = 0; i < 5; i++) {
             LocalDate today = LocalDate.now();
             LocalTime hour = LocalTime.of(12, 0);
             LocalDateTime todayHour = LocalDateTime.of(today, hour);
             Instant todayInstant = todayHour.toInstant(ZoneOffset.UTC);
             Instant tomorrowInstant = todayInstant.plus(i, ChronoUnit.DAYS);
-            instants.add(tomorrowInstant);
+            times.add(tomorrowInstant);
         }
-        return instants;
+        return times;
     }
-    public static ArrayList<Weather> WeatherCall(ArrayList<Instant> instants, List<Location> canary_islands, ArrayList<Weather> weathers) {
+    public static ArrayList<Weather> WeatherCall(ArrayList<Instant> times, List<Location> canary_islands, ArrayList<Weather> climates) {
         WeatherProvider weatherProvider = new WeatherMapProvider(WeatherMapProvider.getAPI_KEY());
         for (Location iteredLocation : canary_islands) {
-            for (Instant iteredInstant : instants) {
+            for (Instant iteredInstant : times) {
                 Weather weather = weatherProvider.getWeather(iteredLocation, iteredInstant);
-
-                if (weather != null) {
-                    System.out.println("Weather for " + iteredLocation.getName() + " at " + iteredInstant + ":");
-                    System.out.println(weather);
-                    System.out.println("\n");
-                } else {
-                    System.out.println("No weather data found for " + iteredLocation.getName() + " at " + iteredInstant + "\n");
-                }
-                weathers.add(weather);
+                climates.add(weather);
             }
-            System.out.println("\n");
         }
-        return weathers;
+        return climates;
     }
 
-    public static void SaveCall(ArrayList<Instant> instants, List<Location> canary_islands) {
+    public static void SaveCall(ArrayList<Instant> times, List<Location> canary_islands) {
         for (Location iteredLocation : canary_islands) {
             WeatherStore weatherStore = new WeatherStoreSqlite();
-            for (Instant iteredInstant : instants) {
+            for (Instant iteredInstant : times) {
                 weatherStore.save(iteredLocation, iteredInstant);
             }
         }
