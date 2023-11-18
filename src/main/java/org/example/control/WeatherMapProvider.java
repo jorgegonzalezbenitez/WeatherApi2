@@ -21,7 +21,6 @@ public class WeatherMapProvider implements WeatherProvider{
     }
     @Override
     public  Weather getWeather(Location location, Instant instant) {
-
         Weather obj_weather = null;
         try {
 
