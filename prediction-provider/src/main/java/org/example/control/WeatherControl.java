@@ -30,7 +30,7 @@ public class WeatherControl {
 
         InstantCreated(times);
         WeatherCall(times,canary_islands,climates);
-        SaveCall(times,canary_islands);
+
 
     }
     public static ArrayList<Instant> InstantCreated(ArrayList<Instant> times) {
@@ -55,14 +55,6 @@ public class WeatherControl {
         return climates;
     }
 
-    public static void SaveCall(ArrayList<Instant> times, List<Location> canary_islands) {
-        for (Location iteredLocation : canary_islands) {
-            WeatherStore weatherStore = new WeatherStoreSqlite();
-            for (Instant iteredInstant : times) {
-                weatherStore.save(iteredLocation, iteredInstant);
-            }
-        }
-    }
     public static void main(String[] args) {
         WeatherControl weatherControl = new WeatherControl( new WeatherMapProvider(WeatherMapProvider.getAPI_KEY()));
         weatherControl.execute();
