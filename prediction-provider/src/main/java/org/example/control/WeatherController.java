@@ -7,11 +7,11 @@ import java.util.List;
 
 public class WeatherController {
     private WeatherProvider weatherProvider;
-    private WeatherStore weatherStore;
+    private WeatherSend weatherSend;
 
-    public WeatherController(WeatherProvider weatherProvider, WeatherStore weatherStore) {
+    public WeatherController(WeatherProvider weatherProvider, WeatherSend weatherSend) {
         this.weatherProvider = weatherProvider;
-        this.weatherStore = weatherStore;
+        this.weatherSend = weatherSend;
     }
 
     public void execute() {
@@ -59,7 +59,7 @@ public class WeatherController {
     public  void saveCall(ArrayList<Instant> times, List<Location> canary_islands) {
         for (Location iteredLocation : canary_islands) {
             for (Instant iteredInstant : times) {
-                weatherStore.save(iteredLocation, iteredInstant);
+                weatherSend.sendBroker(weatherProvider.getWeather(iteredLocation,iteredInstant));
             }
         }
     }

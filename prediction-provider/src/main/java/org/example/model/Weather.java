@@ -1,19 +1,22 @@
 package org.example.model;
+
 import java.time.Instant;
 public class Weather {
     private final double temp;
     private final int humidity;
-    private final int all;
-    private final double speed;
-    private final Double pop;
+    private final int cloud;
+    private final double wind_speed;
+    private final Double prop_rain;
     private final Instant instant;
+    private static final Instant ts = Instant.now();
+    private static final String ss="prediction-provider";
 
-    public Weather(double temp, int humidity, int all, double speed, Double pop, Instant instant) {
+    public Weather(double temp, int humidity, int cloud, double wind_speed, Double prop_rain, Instant instant) {
         this.temp = temp;
         this.humidity = humidity;
-        this.all = all;
-        this.speed = speed;
-        this.pop = pop;
+        this.cloud = cloud;
+        this.wind_speed = wind_speed;
+        this.prop_rain = prop_rain;
         this.instant = instant;
     }
 
@@ -25,22 +28,31 @@ public class Weather {
         return humidity;
     }
 
-    public int getClouds() {
-        return all;
+    public int getCloud() {
+        return cloud;
     }
 
-    public double getSpeed() {
-        return speed;
+    public double getWind_speed() {
+        return wind_speed;
     }
 
-    public Double getPop() {
-        return pop;
+    public Double getProp_rain() {
+        return prop_rain;
     }
-
-
 
     public Instant getInstant() {
         return instant;
     }
+
+    public Instant getTs() {
+        return ts;
+    }
+
+    public String getSs() {
+        return ss;
+    }
+
+
+
 }
 

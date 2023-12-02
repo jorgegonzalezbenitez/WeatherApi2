@@ -3,18 +3,26 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Main {
+    private static String topicName = "prediction.Weather";
+
+
     public static void main(String[] args) {
         Timer timer = new Timer();
 
-        TimerTask TimerTask = new TimerTask() {
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                WeatherControl weatherController = new WeatherControl(new WeatherMapProvider(args[0]));
+                WeatherProvider weatherProvider = new WeatherMapProvider(args[0]);
+                WeatherSend weatherSend = new JMSWeatherStore(args[1], topicName);
+                WeatherController weatherController = new WeatherController(weatherProvider,weatherSend);
                 weatherController.execute();
             }
         };
 
-        long execution_time = 6 * 60 * 60 * 1000;
-        timer.schedule(TimerTask, 0, execution_time);
+        long time_of_execution = 21600 * 1000;
+        timer.schedule(timerTask, 0, time_of_execution);
     }
+
+
+
 }
