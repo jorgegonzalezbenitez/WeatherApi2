@@ -1,15 +1,15 @@
 package org.example;
 
-import org.example.control.JMSWeatherStore;
-import org.example.control.WeatherSend;
+import org.example.model.Weather;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-public class Main {
+public class Main2 {
     private static String topicName = "prediction.Weather";
     private static String clientId = "Jorge";
     public static void main(String[] args) {
-        JMRWeatherStore weatherReceiver = new JMRWeatherStore(args[0], topicName,clientId);
-        weatherReceiver.receiveBroker();
+        JMRWeatherStore weatherStore = new JMRWeatherStore(args[0], topicName, clientId);
+        WeatherWriter writedirectory = new WeatherWriter();
+        writedirectory.mkdir(weatherStore.receiveBroker());
     }
 }

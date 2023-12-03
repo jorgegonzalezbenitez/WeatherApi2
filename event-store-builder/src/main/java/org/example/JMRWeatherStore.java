@@ -5,13 +5,26 @@ import javax.jms.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
-import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.example.model.Weather;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class JMRWeatherStore implements WeatherRecieve{
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import javax.jms.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.Instant;
+
+public class JMRWeatherStore implements WeatherReceive{
 
     private static String url;
     private static String topicName;
@@ -24,7 +37,7 @@ public class JMRWeatherStore implements WeatherRecieve{
     }
 
     @Override
-    public void receiveBroker() {
+    public List<String>  receiveBroker() {
         try {
             ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
             Connection connection = connectionFactory.createConnection();
@@ -36,19 +49,16 @@ public class JMRWeatherStore implements WeatherRecieve{
 
             TopicSubscriber durableSubscriber = session.createDurableSubscriber((Topic) destination, "DurableSubscriber");
 
+            List<String> receivedWeatherList = new ArrayList<>();
+
             durableSubscriber.setMessageListener(message -> {
                 if (message instanceof ObjectMessage) {
                     ObjectMessage objectMessage = (ObjectMessage) message;
                     try {
                         String json = (String) objectMessage.getObject();
-                        Gson gson = new GsonBuilder()
-                                .registerTypeAdapter(Instant.class, (JsonDeserializer<Instant>) (jsonElement, type, jsonDeserializationContext) ->
-                                        Instant.ofEpochSecond(jsonElement.getAsLong()))
-                                .create();
+                        // Aquí puedes realizar operaciones adicionales si es necesario
+                        receivedWeatherList.add(json);
 
-                        Weather weather = gson.fromJson(json, Weather.class);
-
-                        // Ahora puedes hacer lo que quieras con el objeto Weather
                         System.out.println("Received Weather: " + json);
                     } catch (JMSException e) {
                         e.printStackTrace();
@@ -56,13 +66,15 @@ public class JMRWeatherStore implements WeatherRecieve{
                 }
             });
 
-            // Mantén el hilo principal esperando para recibir mensajes
-            Thread.sleep(Long.MAX_VALUE);
+            // Esperar hasta que se reciba un mensaje
+            while (receivedWeatherList.isEmpty()) {
+                Thread.sleep(100);
+            }
 
             connection.close();
+            return receivedWeatherList;
         } catch (JMSException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 }
-

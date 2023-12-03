@@ -21,8 +21,7 @@ public class JMSWeatherStore implements WeatherSend{
 
         @Override
         public void sendBroker(Weather weather) {
-            try{
-
+            try {
                 ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
                 Connection connection = connectionFactory.createConnection();
                 connection.start();
@@ -39,11 +38,18 @@ public class JMSWeatherStore implements WeatherSend{
 
                 String json = gson.toJson(weather);
 
+                if (json != null && !json.equals("null")) {
+                    System.out.println(weather);
 
-                ObjectMessage objectMessage = session.createObjectMessage(json);
+                    ObjectMessage objectMessage = session.createObjectMessage(json);
 
-                System.out.println(json);
-                producer.send(objectMessage);
+                    producer.send(objectMessage);
+
+                    System.out.println("Weather send: " + json);
+                } else {
+                    System.out.println("Skipping sending null object.");
+                }
+
                 connection.close();
             } catch (JMSException e) {
                 throw new RuntimeException(e);

@@ -2,6 +2,7 @@ package org.example.model;
 
 import java.time.Instant;
 public class Weather {
+
     private final double temp;
     private final int humidity;
     private final int cloud;
