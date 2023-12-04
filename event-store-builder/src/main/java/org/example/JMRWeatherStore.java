@@ -1,40 +1,28 @@
 package org.example;
 
 import javax.jms.*;
-
 import com.google.gson.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.example.model.Weather;
-
-import java.io.BufferedWriter;
-import java.io.File;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import javax.jms.*;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.Instant;
 
 public class JMRWeatherStore implements WeatherReceive {
 
     private static String url;
     private static String topicName;
     private static String clientId;
+    private static String path;
 
-    public JMRWeatherStore(String url, String topicName, String clientId) {
+    public JMRWeatherStore(String url, String topicName, String clientId,String path) {
         this.url = url;
         this.topicName = topicName;
         this.clientId = clientId;
+        this.path = path;
     }
 
     @Override
@@ -64,28 +52,23 @@ public class JMRWeatherStore implements WeatherReceive {
 
                         Weather weather = gson.fromJson(json, Weather.class);
 
-                        // Asegúrate de manejar la sincronización correctamente
                         synchronized (receivedWeatherList) {
                             receivedWeatherList.add(weather);
                         }
 
                         System.out.println("Received Weather: " + weather);
                         System.out.println(receivedWeatherList.size());
-                        WriteDirectory.writeWeatherListToDirectory(receivedWeatherList);
+                        WriteDirectory.writeDirectory(receivedWeatherList,path);
 
                     } catch (JMSException e) {
-                        // Puedes agregar aquí lógica adicional si es necesario
                     }
                 }
             });
-
-            // Esperar hasta que se alcance el tiempo de espera
-            Thread.sleep(Long.MAX_VALUE); // Espera máximo 30 segundos (ajusta según tus necesidades)
+            Thread.sleep(Long.MAX_VALUE);
 
             connection.close();
             return receivedWeatherList;
         } catch (JMSException | InterruptedException e) {
-            // Manejar la excepción de manera significativa para tu aplicación
             throw new RuntimeException("Error while receiving JMS message", e);
         }
     }

@@ -2,7 +2,7 @@ package org.example.control;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Main1 {
+public class MainSender {
     private static String topicName = "prediction.Weather";
 
 

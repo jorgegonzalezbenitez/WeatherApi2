@@ -14,7 +14,7 @@ import java.util.List;
 
 class WriteDirectory {
 
-    public  static void writeWeatherListToDirectory(List<Weather> weatherList) {
+    public  static void writeDirectory(List<Weather> weatherList,String path) {
         if (weatherList.isEmpty()) {
             System.err.println("Weather list is empty. Nothing to write.");
             return;
@@ -22,7 +22,7 @@ class WriteDirectory {
 
         Weather firstWeather = weatherList.get(0);
         String ts = firstWeather.getTs().toString().replace(":", "-");
-        String directoryPath = "eventstore" + File.separator + "prediction.Weather" + File.separator + firstWeather.getSs() + File.separator + ts;
+        String directoryPath = path + File.separator + firstWeather.getSs() ;
 
         File directory = new File(directoryPath);
         if (!directory.exists()) {
@@ -34,11 +34,12 @@ class WriteDirectory {
             }
         }
 
-        String filePath = directoryPath + File.separator + "weather-data.events";
+        String filePath = directoryPath + File.separator + ts +".events";
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Instant.class, (JsonSerializer<Instant>) (src, typeOfSrc, context) ->
                         context.serialize(src.getEpochSecond()))
                 .create();
+
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Weather weather : weatherList) {
