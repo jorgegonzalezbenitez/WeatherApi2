@@ -5,5 +5,5 @@ import org.example.model.Weather;
 import java.util.List;
 
 public interface WeatherReceive {
-    List<String> receiveBroker();
+    List<Weather> receiveBroker();
 }

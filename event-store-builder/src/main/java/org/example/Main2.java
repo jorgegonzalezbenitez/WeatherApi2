@@ -8,8 +8,7 @@ public class Main2 {
     private static String topicName = "prediction.Weather";
     private static String clientId = "Jorge";
     public static void main(String[] args) {
-        JMRWeatherStore weatherStore = new JMRWeatherStore(args[0], topicName, clientId);
-        WeatherWriter writedirectory = new WeatherWriter();
-        writedirectory.mkdir(weatherStore.receiveBroker());
+        WeatherReceive weatherReceive = new JMRWeatherStore(args[0], topicName, clientId);
+        weatherReceive.receiveBroker();
     }
 }
