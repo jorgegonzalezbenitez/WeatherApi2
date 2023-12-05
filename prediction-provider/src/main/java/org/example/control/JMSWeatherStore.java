@@ -33,7 +33,7 @@ public class JMSWeatherStore implements WeatherSend{
 
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Instant.class, (JsonSerializer<Instant>) (src, typeOfSrc, context) ->
-                                context.serialize(src.getEpochSecond()))
+                                context.serialize(src.toString()))
                         .create();
 
                 String json = gson.toJson(weather);
@@ -41,15 +41,14 @@ public class JMSWeatherStore implements WeatherSend{
                 if (json != null && !json.equals("null")) {
                     System.out.println(weather);
 
-                    ObjectMessage objectMessage = session.createObjectMessage(json);
+                    TextMessage textMessage = session.createTextMessage(json);
 
-                    producer.send(objectMessage);
+                    producer.send(textMessage);
 
-                    System.out.println("Weather send: " + json);
+                    System.out.println("Tiempo: " + json);
                 } else {
                     System.out.println("Skipping sending null object.");
                 }
-
                 connection.close();
             } catch (JMSException e) {
                 throw new RuntimeException(e);

@@ -9,8 +9,8 @@ public class Weather {
     private final double wind_speed;
     private final Double prop_rain;
     private final Instant instant;
-    private static final Instant ts = Instant.now();
-    private static final String ss="prediction-provider";
+    private final   Instant ts ;
+    private final   String ss;
 
     public Weather(double temp, int humidity, int cloud, double wind_speed, Double prop_rain, Instant instant) {
         this.temp = temp;
@@ -19,6 +19,8 @@ public class Weather {
         this.wind_speed = wind_speed;
         this.prop_rain = prop_rain;
         this.instant = instant;
+        this.ts = Instant.now();
+        this.ss = "prediction-provider";
     }
 
     public double getTemp() {
