@@ -11,8 +11,9 @@ public class Weather {
     private final Instant instant;
     private final   Instant ts ;
     private final   String ss;
+    private Location location;
 
-    public Weather(double temp, int humidity, int cloud, double wind_speed, Double prop_rain, Instant instant) {
+    public Weather(Location location, double temp, int humidity, int cloud, double wind_speed, Double prop_rain, Instant instant) {
         this.temp = temp;
         this.humidity = humidity;
         this.cloud = cloud;
@@ -21,6 +22,7 @@ public class Weather {
         this.instant = instant;
         this.ts = Instant.now();
         this.ss = "prediction-provider";
+        this.location = location;
     }
 
     public double getTemp() {

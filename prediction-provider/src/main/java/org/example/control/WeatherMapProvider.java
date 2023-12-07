@@ -33,10 +33,14 @@ public class WeatherMapProvider implements WeatherProvider{
 
             for (JsonElement list : lists) {
                 JsonObject weather = list.getAsJsonObject();
+                JsonObject city = weathers.getAsJsonObject("city");
                 JsonObject main = weather.get("main").getAsJsonObject();
                 JsonObject clouds = weather.get("clouds").getAsJsonObject();
                 JsonObject wind = weather.get("wind").getAsJsonObject();
 
+                String name = city.getAsJsonPrimitive("name").getAsString();
+                double lat = city.getAsJsonObject("coord").getAsJsonPrimitive("lat").getAsDouble();
+                double lon = city.getAsJsonObject("coord").getAsJsonPrimitive("lon").getAsDouble();
                 double temp = main.get("temp").getAsDouble();
                 int humidity = main.get("humidity").getAsInt();
                 int all = clouds.get("all").getAsInt();
@@ -45,17 +49,18 @@ public class WeatherMapProvider implements WeatherProvider{
                 int dt = weather.get("dt").getAsInt();
                 long unixTimestamp = dt;
                 Instant weatherInstant = Instant.ofEpochSecond(unixTimestamp);
+                Location place = new Location(name,lat,lon);
 
 
                 if (weatherInstant.equals(instant)) {
-                    obj_weather = new Weather(temp, humidity, all, speed, pop, weatherInstant);
+                    obj_weather = new Weather(place,temp, humidity, all, speed, pop, weatherInstant);
                     break;
 
                 }
             }
 
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Error al obtener el clima desde OpenWeatherMap", e);
 
         }
         return obj_weather;

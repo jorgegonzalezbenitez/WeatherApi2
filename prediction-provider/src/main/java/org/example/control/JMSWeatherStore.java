@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSerializer;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.example.model.Weather;
-
 import javax.jms.*;
 import java.time.Instant;
 
@@ -48,6 +47,7 @@ public class JMSWeatherStore implements WeatherSend{
                     System.out.println("Tiempo: " + json);
                 } else {
                     System.out.println("Skipping sending null object.");
+
                 }
                 connection.close();
             } catch (JMSException e) {
