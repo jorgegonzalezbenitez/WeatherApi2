@@ -1,4 +1,4 @@
-# _First practice_
+# _Second practice_
 Desarrollo de Aplicaciones para Ciencia de datos
 
 Curso 2023-2024
@@ -9,7 +9,7 @@ Universidad Las Palmas de Gran Canaria
 
 ## _Functionality_
 
-The software is responsible for acquiring and storing meteorological data from the Canary Islands at a specific point in time. It relies on a weather service provider (OpenWeatherMap) to obtain the information and store it in an SQLite database. This process occurs every 6 hours to update the latest weather forecasts.
+The software is responsible for acquiring and storing meteorological data for the Canary Islands at a specific time. It relies on a weather service provider (OpenWeatherMap) to obtain the information and send it to a broker that acts as an intermediary, and finally write those messages that we send and receive from ActiveMQ in a directory. This process occurs every 6 hours to update the latest weather forecasts.
 
 ## _Resources Used_
 
@@ -29,18 +29,22 @@ I use Markdown, providing a quick and concise overview of the project.
 
 #### Design patterns
 
-It adheres to the Single Responsibility Principle (SRP) to ensure that each component has a single responsibility, enhancing code clarity and maintainability. Additionally, the implementation follows the Controller design pattern, a part of the Model-View-Controller (MVC) architecture, to efficiently manage the interaction between the model and the view.
+The application adheres to the Single Responsibility Principle (SRP), ensuring clear responsibilities for each component and enhancing code clarity. It adopts the Controller design pattern from the Model-View-Controller (MVC) architecture, facilitating efficient management of interactions between the model and the view.
+
+In terms of asynchronous communication, the Observer pattern is employed to receive messages from a JMS topic. The AMQTopicSubscriber class serves as an observer, efficiently handling the reception of messages as they become available. This combination of design principles, patterns, and Lambda architecture establishes a robust foundation for the application, fostering modularity, scalability, and maintainability.
 
 #### Design principle
 
-The design architecture is structured into two extensive sets of packages:
-"org.example.control": This package consolidates control classes, enabling the implementation of project functions, including the retrieval from an API and the storage of data in a database.
-"org.example.model": In this package, model classes are housed, capturing meteorological information, both climatic characteristics and precise location.
+The design architecture is structured in two independent modules: the "prediction-provider" module is responsible for receiving the data from the openweathermap API and sends it to the broker. On the other hand, there is the "event-store-builder" module that receives the broker's messages and writes them to a directory.
+
+Additionally, the application leverages a Lambda system architecture, dividing operations into real-time and batch processing. This architectural choice enables effective handling of large datasets and provides flexibility for handling continuous streams and periodic batch operations.
 
 
 #### Project Diagram in StarUml
-<<<<<<< HEAD
-<img width="605" alt="image" src="https://github.com/jorgegonzalezbenitez/WeatherApi/assets/145259600/4a305b3c-dbfd-4521-8819-5ddce64ea942">
-=======
-<img width="605" alt="image" src="https://github.com/jorgegonzalezbenitez/WeatherApi/assets/145259600/4a305b3c-dbfd-4521-8819-5ddce64ea942">
->>>>>>> origin/master
+
+This is the UML class diagram that represents and illustrates the functionality of the "prediction-Provider" module.
+<img width="586" alt="image" src="https://github.com/jorgegonzalezbenitez/WeatherApi/assets/145259600/4832f87e-3210-4d3b-b2c1-49eed6a38eae">
+
+This is the UML class diagram that represents and illustrates the functionality of the "event-store-builder" module.
+<img width="538" alt="image" src="https://github.com/jorgegonzalezbenitez/WeatherApi/assets/145259600/4dfc25f4-8f43-4b86-80c9-152257c752d2">
+
