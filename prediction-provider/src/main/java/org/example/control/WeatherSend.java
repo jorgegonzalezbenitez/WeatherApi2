@@ -1,4 +1,5 @@
 package org.example.control;
+
 import org.example.model.Weather;
 
 

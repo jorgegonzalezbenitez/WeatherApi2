@@ -1,4 +1,5 @@
 package org.example.control;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -8,23 +9,23 @@ import org.jsoup.Jsoup;
 import java.time.Instant;
 
 public class WeatherMapProvider implements WeatherProvider{
-    private static String API_KEY;
+    private static String apiKey;
 
 
     public  WeatherMapProvider(String API_KEY) {
-        this.API_KEY = API_KEY;
+        this.apiKey = API_KEY;
 
     }
 
     public static String getAPI_KEY() {
-        return API_KEY;
+        return apiKey;
     }
     @Override
     public  Weather getWeather(Location location, Instant instant) {
         Weather obj_weather = null;
         try {
 
-            String url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + location.getLat() + "&lon=" + location.getLon() + "&appid=" + API_KEY;
+            String url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + location.getLat() + "&lon=" + location.getLon() + "&appid=" + apiKey;
             String jsonString = Jsoup.connect(url).ignoreContentType(true).execute().body();
             Gson gson = new Gson();
             JsonObject weathers = gson.fromJson(jsonString, JsonObject.class);

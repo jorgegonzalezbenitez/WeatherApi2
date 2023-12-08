@@ -5,7 +5,6 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-
 public class WeatherController {
     private WeatherProvider weatherProvider;
     private WeatherSend weatherSend;

@@ -6,19 +6,19 @@ public class Weather {
     private final double temp;
     private final int humidity;
     private final int cloud;
-    private final double wind_speed;
-    private final Double prop_rain;
+    private final double windSpeed;
+    private final Double propRain;
     private final Instant instant;
     private final   Instant ts ;
     private final   String ss;
     private Location location;
 
-    public Weather(Location location, double temp, int humidity, int cloud, double wind_speed, Double prop_rain, Instant instant) {
+    public Weather(Location location, double temp, int humidity, int cloud, double windSpeed, Double propRain, Instant instant) {
         this.temp = temp;
         this.humidity = humidity;
         this.cloud = cloud;
-        this.wind_speed = wind_speed;
-        this.prop_rain = prop_rain;
+        this.windSpeed = windSpeed;
+        this.propRain = propRain;
         this.instant = instant;
         this.ts = Instant.now();
         this.ss = "prediction-provider";
@@ -37,12 +37,12 @@ public class Weather {
         return cloud;
     }
 
-    public double getWind_speed() {
-        return wind_speed;
+    public double getWindSpeed() {
+        return windSpeed;
     }
 
-    public Double getProp_rain() {
-        return prop_rain;
+    public Double getPropRain() {
+        return propRain;
     }
 
     public Instant getInstant() {
