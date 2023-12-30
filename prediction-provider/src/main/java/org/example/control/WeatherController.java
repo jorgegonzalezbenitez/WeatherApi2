@@ -14,16 +14,16 @@ public class WeatherController {
     }
 
     public void execute() {
-        Location gran_canaria = new Location("Gran Canaria", 28.09973, -15.41343);
-        Location tenerife = new Location("Tenerife", 28.46824, -16.25462);
-        Location hierro = new Location("Hierro", 27.80628, -17.91578);
-        Location gomera = new Location("Gomera", 28.09163, -17.11331);
-        Location fuerteventura = new Location("Fuerteventura", 28.50038, -13.86272);
-        Location palma = new Location("Palma", 28.68351, -17.76421);
-        Location lanzarote = new Location("Lanzarote", 28.96302, -13.54769);
-        Location graciosa = new Location("Graciosa", 29.23147, -13.50341);
+        Location madrid = new Location("Madrid", 40.4168, -3.7038);
+        Location barcelona = new Location("Barcelona", 41.3851, 2.1734);
+        Location sevilla = new Location("Sevilla", 37.3886, -5.9822);
+        Location valencia = new Location("Valencia", 39.4699, -0.3763);
+        Location vigo = new Location("Vigo", 42.2328, 8.7226);
+        Location cadiz = new Location("Cádiz", 36.5298, -6.2925);
+        Location pamplona = new Location("Pamplona", 42.8169, -1.6431);
+        Location malaga = new Location("Málaga", 36.7213, -4.4214);
 
-        List<Location> canary_islands = List.of(gran_canaria, tenerife,lanzarote,gomera,fuerteventura,palma,hierro,graciosa);
+        List<Location> canary_islands = List.of(madrid,barcelona,sevilla,valencia,vigo,cadiz,pamplona,malaga);
 
         
         ArrayList<Weather> climates =new ArrayList<>();
