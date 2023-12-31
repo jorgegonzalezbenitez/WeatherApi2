@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 
 public class HotelMapProvider implements HotelProvider {
     @Override
@@ -29,11 +30,11 @@ public class HotelMapProvider implements HotelProvider {
 
 
 
-                JsonArray rates = resultObject.getAsJsonArray("rates");
+                JsonArray ratesObject = resultObject.getAsJsonArray("rates");
 
+                ArrayList<Rate> rates = new ArrayList<>();
 
-
-                for (JsonElement rate : rates) {
+                for (JsonElement rate : ratesObject) {
                     JsonObject rateObject = rate.getAsJsonObject();
 
                     String code = rateObject.getAsJsonPrimitive("code").getAsString();
@@ -41,21 +42,12 @@ public class HotelMapProvider implements HotelProvider {
                     int rateName = rateObject.getAsJsonPrimitive("rate").getAsInt();
                     int tax = rateObject.getAsJsonPrimitive("tax").getAsInt();
 
-                    hotel = new Hotel(code, name, rateName, tax,instant, date1);
+                    Rate rate1 = new Rate(code,name,rateName,tax);
 
+                    rates.add(rate1);
 
-                    Gson gson = new GsonBuilder()
-                            .registerTypeAdapter(Instant.class, (JsonSerializer<Instant>) (src, typeOfSrc, context) ->
-                                    context.serialize(src.toString()))
-                            .create();
+                }hotel = new Hotel(rates,instant,date1);
 
-                    String json = gson.toJson(hotel);
-                    System.out.println(json);
-
-
-
-
-                }
 
 
 

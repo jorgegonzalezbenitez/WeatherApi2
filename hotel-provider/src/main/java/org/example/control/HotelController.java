@@ -78,11 +78,13 @@ public class HotelController {
                 Hotel hotel = hotelProvider.getHotel(iteredLocation);
                 hotels.add(hotel);
 
-        }return hotels;
+        }
+        System.out.println(hotels.size());
+        return hotels;
     }
     public  void callStored( List<Date> dates) {
-        for (Date iteredLocation : dates) {
-            hotelSend.sendBroker(hotelProvider.getHotel(iteredLocation));
+        for (Date date : dates) {
+            hotelSend.sendBroker(hotelProvider.getHotel(date));
 
         }
     }
