@@ -17,7 +17,7 @@ public class FileStateEventBuilder implements Listener{
         this.directory = directory;
     }
     @Override
-    public void consume(String message) {
+    public void consume(String message,String topicName) {
         System.out.println("Message received");
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
@@ -31,7 +31,7 @@ public class FileStateEventBuilder implements Listener{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String formattedDate = dateTime.format(formatter);
 
-        String directoryPath = directory + File.separator + newSS;
+        String directoryPath = directory+ File.separator + "datalake" + File.separator + "eventstore" + File.separator + topicName + File.separator + newSS;
         createDirectory(directoryPath);
 
         String filePath = directoryPath + File.separator + formattedDate + ".events";

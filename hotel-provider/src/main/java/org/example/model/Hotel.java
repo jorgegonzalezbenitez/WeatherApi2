@@ -9,14 +9,12 @@ public class Hotel {
     private final List<Rate> rates;
     private final Date date;
     private  final String ss;
-    private  final Instant timeStamp;
     private final Instant ts;
 
 
 
-    public Hotel(List<Rate> rates,Instant timeStamp, Date date) {
+    public Hotel(List<Rate> rates, Date date) {
         this.rates = rates;
-        this.timeStamp = timeStamp;
         this.date = date;
         this.ss = "hotel-provider";
         this.ts = Instant.now();
@@ -35,9 +33,6 @@ public class Hotel {
         return ss;
     }
 
-    public Instant getTimeStamp() {
-        return timeStamp;
-    }
 
     public Instant getTs() {
         return ts;

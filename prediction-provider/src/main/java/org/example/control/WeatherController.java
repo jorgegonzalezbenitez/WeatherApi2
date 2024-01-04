@@ -15,7 +15,7 @@ public class WeatherController {
 
     public void execute() {
         Location madrid = new Location("Madrid", 40.4168, -3.7038);
-        Location barcelona = new Location("Barcelona", 41.3851, 2.1734);
+        Location barcelona = new Location("Barcelona", 41.3888, 2.159);
         Location sevilla = new Location("Sevilla", 37.3886, -5.9822);
         Location valencia = new Location("Valencia", 39.4699, -0.3763);
         Location vigo = new Location("Vigo", 42.2328, 8.7226);
@@ -53,6 +53,7 @@ public class WeatherController {
                 climates.add(weather);
             }
         }
+        System.out.println(climates.size());
         return climates;
     }
     public  void saveCall(ArrayList<Instant> times, List<Location> canary_islands) {

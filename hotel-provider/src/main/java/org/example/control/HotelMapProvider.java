@@ -25,9 +25,6 @@ public class HotelMapProvider implements HotelProvider {
                 String checkOutDate = resultObject.getAsJsonPrimitive("chk_out").getAsString();
                 Date date1 = new Date(checkInDate, checkOutDate, date.getHotelKey(), date.getName(), date.getLocation());
 
-                long dt = responseJson.get("timestamp").getAsLong();
-                Instant instant = Instant.ofEpochMilli(dt);
-
 
 
                 JsonArray ratesObject = resultObject.getAsJsonArray("rates");
@@ -46,7 +43,7 @@ public class HotelMapProvider implements HotelProvider {
 
                     rates.add(rate1);
 
-                }hotel = new Hotel(rates,instant,date1);
+                }hotel = new Hotel(rates,date1);
 
 
 
@@ -56,10 +53,8 @@ public class HotelMapProvider implements HotelProvider {
 
 
 
-            } else {
-                // Manejar el caso en el que "result" no es un JsonObject (por ejemplo, es un JsonNull)
-                // Puede lanzar una excepción, asignar un valor predeterminado, etc.
-            }} catch (IOException e) {
+            }
+        } catch (IOException e) {
         throw new RuntimeException(e);
 
 }return hotel;
