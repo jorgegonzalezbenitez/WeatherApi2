@@ -1,16 +1,13 @@
 package org.example;
 
 import javax.jms.JMSException;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainReceiver {
 
 
     public static void main(String[] args) throws JMSException {
-        Subscriber subscriber = new AMQTopicSubscriber(args[0]);
-        FileStateEventBuilder listener = new FileStateEventBuilder(args[1]);
+        Subscriber subscriber = new DurableSubscriber(args[0]);
+        DataLake listener = new DataLake(args[1]);
         subscriber.start(listener);
     }
 }

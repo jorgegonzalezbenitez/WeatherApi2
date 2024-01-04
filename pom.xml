@@ -12,6 +12,7 @@
         <module>prediction-provider</module>
         <module>event-store-builder</module>
         <module>hotel-provider</module>
+        <module>holiday-business-units</module>
     </modules>
 
     <properties>
@@ -30,6 +31,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

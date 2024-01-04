@@ -28,7 +28,7 @@ public class HotelController {
 
         List<Date> dates = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             String checkIn = localDate.format(DateTimeFormatter.ISO_DATE);
             String checkOut = localDate.plusDays(1).format(DateTimeFormatter.ISO_DATE);
 
