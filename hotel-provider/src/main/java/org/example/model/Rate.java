@@ -1,6 +1,6 @@
 package org.example.model;
 
-import java.util.List;
+
 
 public class Rate {
     private final String code;

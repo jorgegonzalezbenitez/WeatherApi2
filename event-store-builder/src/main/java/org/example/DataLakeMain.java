@@ -2,7 +2,7 @@ package org.example;
 
 import javax.jms.JMSException;
 
-public class MainReceiver {
+public class DataLakeMain {
 
 
     public static void main(String[] args) throws JMSException {

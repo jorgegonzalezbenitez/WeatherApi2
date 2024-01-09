@@ -1,6 +1,7 @@
-package org.example;
+package org.example.Controller;
 
-public interface Listener {
+
+public interface DatabaseStore {
     void weatherStore(String message);
     void hotelStore(String message);
 }

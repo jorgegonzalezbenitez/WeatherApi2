@@ -5,7 +5,6 @@ import org.example.model.*;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
 
 public class HotelMapProvider implements HotelProvider {
@@ -44,14 +43,6 @@ public class HotelMapProvider implements HotelProvider {
                     rates.add(rate1);
 
                 }hotel = new Hotel(rates,date1);
-
-
-
-
-
-
-
-
 
             }
         } catch (IOException e) {

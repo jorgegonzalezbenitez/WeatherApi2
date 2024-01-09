@@ -19,9 +19,9 @@ public class WeatherController {
         Location sevilla = new Location("Sevilla", 37.3886, -5.9822);
         Location valencia = new Location("Valencia", 39.4699, -0.3763);
         Location vigo = new Location("Vigo", 42.2328, 8.7226);
-        Location cadiz = new Location("Cádiz", 36.5298, -6.2925);
+        Location cadiz = new Location("Cadiz", 36.5298, -6.2925);
         Location pamplona = new Location("Pamplona", 42.8169, -1.6431);
-        Location malaga = new Location("Málaga", 36.7213, -4.4214);
+        Location malaga = new Location("Malaga", 36.7213, -4.4214);
 
         List<Location> canary_islands = List.of(madrid,barcelona,sevilla,valencia,vigo,cadiz,pamplona,malaga);
 

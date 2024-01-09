@@ -1,7 +1,6 @@
 package org.example.control;
 
-import org.example.control.HotelProvider;
-import org.example.control.HotelSend;
+
 import org.example.model.*;
 
 import java.time.*;
@@ -28,7 +27,7 @@ public class HotelController {
 
         List<Date> dates = new ArrayList<>();
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
             String checkIn = localDate.format(DateTimeFormatter.ISO_DATE);
             String checkOut = localDate.plusDays(1).format(DateTimeFormatter.ISO_DATE);
 
@@ -47,15 +46,15 @@ public class HotelController {
             Date vigo1= new Date(checkIn,checkOut, "g187509-d206996","NH Collection Vigo","Vigo" );
             Date vigo2 = new Date(checkIn,checkOut, "g187507-d289800","Hotel Plaza Vigo","Vigo" );
             Date vigo3= new Date(checkIn,checkOut, "g187509-d11980017","B&B HOTEL Vigo","Vigo" );
-            Date cadiz1= new Date(checkIn,checkOut, "g187432-d622669","Senator Cadiz Spa Hotel","Cádiz" );
-            Date cadiz2= new Date(checkIn,checkOut, "g187432-d231578","Monte Puertatierra Hotel","Cádiz" );
-            Date cadiz3= new Date(checkIn,checkOut, "g187432-d25179749","Hotel Cádiz Bahía","Cádiz" );
+            Date cadiz1= new Date(checkIn,checkOut, "g187432-d622669","Senator Cadiz Spa Hotel","Cadiz" );
+            Date cadiz2= new Date(checkIn,checkOut, "g187432-d231578","Monte Puertatierra Hotel","Cadiz" );
+            Date cadiz3= new Date(checkIn,checkOut, "g187432-d25179749","Hotel Cádiz Bahía","Cadiz" );
             Date pamplona1= new Date(checkIn,checkOut, "g187520-d232830","NH Pamplona Iruna Park","Pamplona" );
             Date pamplona2= new Date(checkIn,checkOut, "g187520-d228484","Hotel Tres Reyes","Pamplona" );
             Date pamplona3= new Date(checkIn,checkOut, "g187520-d236222","Gran Hotel La Perla","Pamplona" );
-            Date malaga1= new Date(checkIn,checkOut, "g187438-d650588","Barceló Málaga","Málaga" );
-            Date malaga2= new Date(checkIn,checkOut, "g187438-d498946","Atarazanas Malaga Boutique Hotel","Málaga" );
-            Date malaga3= new Date(checkIn,checkOut, "g187438-d23843116","H10 Croma Málaga","Málaga" );
+            Date malaga1= new Date(checkIn,checkOut, "g187438-d650588","Barceló Málaga","Malaga" );
+            Date malaga2= new Date(checkIn,checkOut, "g187438-d498946","Atarazanas Malaga Boutique Hotel","Malaga" );
+            Date malaga3= new Date(checkIn,checkOut, "g187438-d23843116","H10 Croma Málaga","Malaga" );
 
             dates.add(madrid1);
             dates.add(madrid2);

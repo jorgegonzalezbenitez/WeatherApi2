@@ -50,7 +50,7 @@ public class WeatherMapProvider implements WeatherProvider{
                 int dt = weather.get("dt").getAsInt();
                 long unixTimestamp = dt;
                 Instant weatherInstant = Instant.ofEpochSecond(unixTimestamp);
-                Location place = new Location(name,lat,lon);
+                Location place = new Location(location.getName(),lat,lon);
 
 
                 if (weatherInstant.equals(instant)) {
