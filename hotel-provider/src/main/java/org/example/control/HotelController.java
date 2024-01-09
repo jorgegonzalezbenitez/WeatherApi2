@@ -86,11 +86,11 @@ public class HotelController {
 
         ArrayList<Hotel> hotels = new ArrayList<>();
 
-        callWeatherGet(dates, hotels);
+        callHotelGet(dates, hotels);
         callStored(dates);
     }
 
-    public ArrayList<Hotel> callWeatherGet(List<Date> islandHotel, ArrayList<Hotel> hotels) {
+    public ArrayList<Hotel> callHotelGet(List<Date> islandHotel, ArrayList<Hotel> hotels) {
         for (Date iteredLocation : islandHotel) {
             Hotel hotel = hotelProvider.getHotel(iteredLocation);
             hotels.add(hotel);
